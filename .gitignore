@@ -5,3 +5,4 @@ target/
 results/
 !**/src/main/**/out/
 !**/src/test/**/out/
+/concurency_tests.iml
