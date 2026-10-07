@@ -13,12 +13,12 @@ mvn clean install
 Separate test in quick mode
 
 ```powershell
-java -jar target/jcstress.jar -t com.example.counter.CounterJcstressTest -m quick
+java -jar target/concurency-tests-1.0-SNAPSHOT-jcstress.jar -t com.example.counter.CounterJcstressTest -m quick
 ```
 All tests 
 
 ```powershell
-java -jar target/jcstress.jar
+java -jar target/concurency-tests-1.0-SNAPSHOT-jcstress.jar
 ```
 
 ## JMH
