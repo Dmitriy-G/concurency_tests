@@ -34,7 +34,7 @@ public class StampedLockJcstressTest {
             long stamp = lock.tryOptimisticRead();
             int observedFirst = first;
             int observedSecond = second;
-            if (!lock.validate(stamp)) {
+            if (lock.validate(stamp)) {
                 return observedFirst * 10 + observedSecond;
             }
 
