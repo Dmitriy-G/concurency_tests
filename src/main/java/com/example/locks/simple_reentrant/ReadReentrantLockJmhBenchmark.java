@@ -1,6 +1,6 @@
-package com.example.locks.read_write_reentrant;
+package com.example.locks.simple_reentrant;
 
-import com.example.locks.MediumWorkload;
+import com.example.locks.BlackHole10KWorkload;
 import com.example.locks.ReadWriteOperationMix;
 import com.example.locks.ReadWriteTestCandidate;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -11,11 +11,11 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
-public class HeavyReadWriteLockJmhBenchmark {
+public class ReadReentrantLockJmhBenchmark {
 
     @State(Scope.Benchmark)
     public static class SharedState {
@@ -32,26 +32,26 @@ public class HeavyReadWriteLockJmhBenchmark {
     }
 
     private static final class Candidate implements ReadWriteTestCandidate {
-        private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-        private final MediumWorkload workload = new MediumWorkload();
+        private final ReentrantLock lock = new ReentrantLock();
+        private final BlackHole10KWorkload workload = new BlackHole10KWorkload();
 
         @Override
         public int read() {
-            lock.readLock().lock();
+            lock.lock();
             try {
                 return workload.sum();
             } finally {
-                lock.readLock().unlock();
+                lock.unlock();
             }
         }
 
         @Override
         public void write() {
-            lock.writeLock().lock();
+            lock.lock();
             try {
                 workload.incrementOne();
             } finally {
-                lock.writeLock().unlock();
+                lock.unlock();
             }
         }
     }

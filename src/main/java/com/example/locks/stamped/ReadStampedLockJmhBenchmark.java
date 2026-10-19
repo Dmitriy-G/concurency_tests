@@ -1,5 +1,6 @@
 package com.example.locks.stamped;
 
+import com.example.locks.BlackHole10KWorkload;
 import com.example.locks.ReadWriteOperationMix;
 import com.example.locks.ReadWriteTestCandidate;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -12,14 +13,13 @@ import org.openjdk.jmh.annotations.State;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.StampedLock;
 
-@State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
-public class StampedLockJmhBenchmark {
+public class ReadStampedLockJmhBenchmark {
 
     @State(Scope.Benchmark)
     public static class SharedState {
-        private final ReadWriteTestCandidate candidate = new StampedLockCandidate();
+        private final ReadWriteTestCandidate candidate = new Candidate();
     }
 
     @Benchmark
@@ -31,23 +31,21 @@ public class StampedLockJmhBenchmark {
         return shared.candidate.read();
     }
 
-    private static final class StampedLockCandidate implements ReadWriteTestCandidate {
+    private static final class Candidate implements ReadWriteTestCandidate {
         private final StampedLock lock = new StampedLock();
-        private int first;
-        private int second;
+        private final BlackHole10KWorkload workload = new BlackHole10KWorkload();
 
         @Override
         public int read() {
             long stamp = lock.tryOptimisticRead();
-            int observedFirst = first;
-            int observedSecond = second;
+            int result = workload.sum();
             if (lock.validate(stamp)) {
-                return observedFirst + observedSecond;
+                return result;
             }
 
             stamp = lock.readLock();
             try {
-                return first + second;
+                return workload.sum();
             } finally {
                 lock.unlockRead(stamp);
             }
@@ -57,8 +55,7 @@ public class StampedLockJmhBenchmark {
         public void write() {
             long stamp = lock.writeLock();
             try {
-                first++;
-                second++;
+                workload.incrementOne();
             } finally {
                 lock.unlockWrite(stamp);
             }

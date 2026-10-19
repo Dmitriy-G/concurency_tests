@@ -8,7 +8,7 @@ import org.openjdk.jmh.annotations.State;
 
 @State(Scope.Thread)
 public class ReadWriteOperationMix {
-    @Param({"1"})
+    @Param({"50"})
     public int writePercent;
 
     private int schedule;

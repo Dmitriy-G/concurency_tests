@@ -1,5 +1,6 @@
-package com.example.locks.simple_reentrant;
+package com.example.locks.read_write_reentrant;
 
+import com.example.locks.BlackHole10KWorkload;
 import com.example.locks.ReadWriteOperationMix;
 import com.example.locks.ReadWriteTestCandidate;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -10,16 +11,15 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-@State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
-public class ReentrantLockJmhBenchmark {
+public class ReadWriteLockJmhBenchmark {
 
     @State(Scope.Benchmark)
     public static class SharedState {
-        private final ReadWriteTestCandidate candidate = new ReentrantLockCandidate();
+        private final ReadWriteTestCandidate candidate = new Candidate();
     }
 
     @Benchmark
@@ -31,29 +31,27 @@ public class ReentrantLockJmhBenchmark {
         return shared.candidate.read();
     }
 
-    private static final class ReentrantLockCandidate implements ReadWriteTestCandidate {
-        private final ReentrantLock lock = new ReentrantLock();
-        private int first;
-        private int second;
+    private static final class Candidate implements ReadWriteTestCandidate {
+        private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+        private final BlackHole10KWorkload workload = new BlackHole10KWorkload();
 
         @Override
         public int read() {
-            lock.lock();
+            lock.readLock().lock();
             try {
-                return first + second;
+                return workload.sum();
             } finally {
-                lock.unlock();
+                lock.readLock().unlock();
             }
         }
 
         @Override
         public void write() {
-            lock.lock();
+            lock.writeLock().lock();
             try {
-                first++;
-                second++;
+                workload.incrementOne();
             } finally {
-                lock.unlock();
+                lock.writeLock().unlock();
             }
         }
     }

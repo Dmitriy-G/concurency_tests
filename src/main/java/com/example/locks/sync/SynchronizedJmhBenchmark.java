@@ -1,6 +1,6 @@
 package com.example.locks.sync;
 
-import com.example.locks.MediumWorkload;
+import com.example.locks.BlackHole10KWorkload;
 import com.example.locks.ReadWriteOperationMix;
 import com.example.locks.ReadWriteTestCandidate;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
-public class HeavyReadSynchronizedJmhBenchmark {
+public class SynchronizedJmhBenchmark {
 
     @State(Scope.Benchmark)
     public static class SharedState {
@@ -31,7 +31,7 @@ public class HeavyReadSynchronizedJmhBenchmark {
     }
 
     private static final class Candidate implements ReadWriteTestCandidate {
-        private final MediumWorkload workload = new MediumWorkload();
+        private final BlackHole10KWorkload workload = new BlackHole10KWorkload();
 
         @Override
         public synchronized int read() {
