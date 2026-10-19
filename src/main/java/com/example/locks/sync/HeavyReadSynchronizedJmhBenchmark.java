@@ -1,6 +1,6 @@
 package com.example.locks.sync;
 
-import com.example.locks.LongArrayWorkload;
+import com.example.locks.MediumWorkload;
 import com.example.locks.ReadWriteOperationMix;
 import com.example.locks.ReadWriteTestCandidate;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -31,7 +31,7 @@ public class HeavyReadSynchronizedJmhBenchmark {
     }
 
     private static final class Candidate implements ReadWriteTestCandidate {
-        private final LongArrayWorkload workload = new LongArrayWorkload();
+        private final MediumWorkload workload = new MediumWorkload();
 
         @Override
         public synchronized int read() {

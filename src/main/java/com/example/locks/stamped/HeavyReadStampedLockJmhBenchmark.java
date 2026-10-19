@@ -1,6 +1,6 @@
 package com.example.locks.stamped;
 
-import com.example.locks.LongArrayWorkload;
+import com.example.locks.MediumWorkload;
 import com.example.locks.ReadWriteOperationMix;
 import com.example.locks.ReadWriteTestCandidate;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -33,7 +33,7 @@ public class HeavyReadStampedLockJmhBenchmark {
 
     private static final class Candidate implements ReadWriteTestCandidate {
         private final StampedLock lock = new StampedLock();
-        private final LongArrayWorkload workload = new LongArrayWorkload();
+        private final MediumWorkload workload = new MediumWorkload();
 
         @Override
         public int read() {

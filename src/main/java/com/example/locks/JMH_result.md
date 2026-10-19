@@ -37,6 +37,7 @@ Benchmark    (writePercent)   Mode  Cnt         Score        Error      Units
 
 ReentrantReadWriteLock    1  thrpt   25   19334555.993  ?    45758.693  ops/s
 ReentrantLock             1  thrpt   25   18733767.125  ?   874786.821  ops/s
+StampedLock               1  thrpt   25   20689091.704  ?    46291.772  ops/s
 Synchronized              1  thrpt   25   19837532.502  ?    54870.694  ops/s
 
 # JMH locks benchmark results reads/writes 99/1 (medium read section with 10 threads)
@@ -45,4 +46,5 @@ Benchmark    (writePercent)   Mode  Cnt         Score        Error      Units
 
 ReentrantReadWriteLock    1  thrpt   25    6862880.058  ?   322740.106  ops/s
 ReentrantLock             1  thrpt   25   12396244.769  ?  1026737.341  ops/s
+StampedLock               1  thrpt   25   22359742.237  ?   941776.493  ops/s
 Synchronized              1  thrpt   25   13587181.160  ?   982114.051  ops/s

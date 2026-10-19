@@ -1,6 +1,6 @@
 package com.example.locks;
 
-public final class LongArrayWorkload {
+public final class MediumWorkload {
     private final long[] values = new long[1024];
     private int nextWriteIndex;
 

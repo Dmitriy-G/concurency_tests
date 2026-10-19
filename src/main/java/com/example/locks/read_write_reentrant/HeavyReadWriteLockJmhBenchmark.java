@@ -1,6 +1,6 @@
 package com.example.locks.read_write_reentrant;
 
-import com.example.locks.LongArrayWorkload;
+import com.example.locks.MediumWorkload;
 import com.example.locks.ReadWriteOperationMix;
 import com.example.locks.ReadWriteTestCandidate;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -33,7 +33,7 @@ public class HeavyReadWriteLockJmhBenchmark {
 
     private static final class Candidate implements ReadWriteTestCandidate {
         private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-        private final LongArrayWorkload workload = new LongArrayWorkload();
+        private final MediumWorkload workload = new MediumWorkload();
 
         @Override
         public int read() {
