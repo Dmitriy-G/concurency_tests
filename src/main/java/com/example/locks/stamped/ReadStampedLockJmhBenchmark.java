@@ -1,8 +1,6 @@
 package com.example.locks.stamped;
 
-import com.example.locks.BlackHole10KWorkload;
-import com.example.locks.ReadWriteOperationMix;
-import com.example.locks.ReadWriteTestCandidate;
+import com.example.locks.*;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -33,7 +31,10 @@ public class ReadStampedLockJmhBenchmark {
 
     private static final class Candidate implements ReadWriteTestCandidate {
         private final StampedLock lock = new StampedLock();
-        private final BlackHole10KWorkload workload = new BlackHole10KWorkload();
+        // private final BlackHole100Workload workload = new BlackHole100Workload();
+        // private final BlackHole5KWorkload workload = new BlackHole5KWorkload();
+        // private final BlackHole10KWorkload workload = new BlackHole10KWorkload();
+        private final BlackHole50KWorkload workload = new BlackHole50KWorkload();
 
         @Override
         public int read() {

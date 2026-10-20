@@ -1,8 +1,6 @@
 package com.example.locks.sync;
 
-import com.example.locks.BlackHole10KWorkload;
-import com.example.locks.ReadWriteOperationMix;
-import com.example.locks.ReadWriteTestCandidate;
+import com.example.locks.*;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -31,7 +29,11 @@ public class SynchronizedJmhBenchmark {
     }
 
     private static final class Candidate implements ReadWriteTestCandidate {
-        private final BlackHole10KWorkload workload = new BlackHole10KWorkload();
+
+        //private final BlackHole100Workload workload = new BlackHole100Workload();
+        // private final BlackHole5KWorkload workload = new BlackHole5KWorkload();
+        // private final BlackHole10KWorkload workload = new BlackHole10KWorkload();
+        private final BlackHole50KWorkload workload = new BlackHole50KWorkload();
 
         @Override
         public synchronized int read() {

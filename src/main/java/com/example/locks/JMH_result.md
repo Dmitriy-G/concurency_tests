@@ -108,4 +108,50 @@ Synchronized      1         thrpt    25      43818.922 ?     1805.434  ops/s
 
 ### Benchmark read/write 50/50
 
+Benchmark  (writePercent)   Mode   Cnt          Score          Error  Units
+
+ReadWriteLock      50       thrpt   25       94871.591 ? 2338.723  ops/s
+ReentrantLock      50       thrpt   25       88102.528 ?  131.302  ops/s
+StampedLock        50       thrpt   25       93778.464 ? 1030.368  ops/s
+Synchronized       50       thrpt   25       87320.300 ? 1191.414  ops/s
+
 ### Benchmark read/write 99/1
+
+ReadWriteLock     1         thrpt   25      560347.301 ?  9108.989  ops/s
+ReentrantLock     1         thrpt   25       78623.620 ?   215.557  ops/s
+StampedLock       1         thrpt   25      713082.943 ? 12435.873  ops/s
+Synchronized      1         thrpt   25       74372.864 ?   379.091  ops/s
+
+# Black hole 50k
+
+## 1 thread
+
+### Benchmark read/write 50/50
+
+ReadWriteLock      50       thrpt   25      22856.948 ? 5547.597  ops/s
+ReentrantLock      50       thrpt   25      31445.376 ? 1492.909  ops/s
+StampedLock        50       thrpt   25      28751.615 ? 1166.758  ops/s
+Synchronized       50       thrpt   25      30111.805 ? 1316.372  ops/s
+
+### Benchmark read/write 99/1
+
+ReadWriteLock      1        thrpt   25      10060.138 ? 2024.140  ops/s
+ReentrantLock      1        thrpt   25       9041.086 ?  408.921  ops/s
+StampedLock        1        thrpt   25      11882.600 ? 2806.462  ops/s
+Synchronized       1        thrpt   25      13283.177 ? 2888.365  ops/s
+
+## 10 threads
+
+### Benchmark read/write 50/50
+
+ReadWriteLock      50       thrpt   25      81210.571 ? 6877.372  ops/s
+ReentrantLock      50       thrpt   25      29942.230 ?  835.876  ops/s
+StampedLock        50       thrpt   25      70128.933 ?  573.828  ops/s
+Synchronized       50       thrpt   25      31912.874 ? 1109.638  ops/s
+
+### Benchmark read/write 99/1
+
+ReadWriteLock      1        thrpt   25     133250.915 ? 2796.915  ops/s
+ReentrantLock      1        thrpt   25      16340.690 ?  102.864  ops/s
+StampedLock        1        thrpt   25     147734.423 ?  656.235  ops/s
+Synchronized       1        thrpt   25      16427.366 ?   81.447  ops/s
