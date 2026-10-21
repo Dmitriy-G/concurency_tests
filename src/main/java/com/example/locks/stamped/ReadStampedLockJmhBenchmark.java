@@ -31,10 +31,7 @@ public class ReadStampedLockJmhBenchmark {
 
     private static final class Candidate implements ReadWriteTestCandidate {
         private final StampedLock lock = new StampedLock();
-        // private final BlackHole100Workload workload = new BlackHole100Workload();
-        // private final BlackHole5KWorkload workload = new BlackHole5KWorkload();
-        // private final BlackHole10KWorkload workload = new BlackHole10KWorkload();
-        private final BlackHole50KWorkload workload = new BlackHole50KWorkload();
+        private BlackHoleWorkload workload = new BlackHoleWorkload();
 
         @Override
         public int read() {

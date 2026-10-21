@@ -2,12 +2,17 @@ package com.example.locks;
 
 import org.openjdk.jmh.infra.Blackhole;
 
-public final class BlackHole100Workload {
+public final class BlackHoleWorkload {
 
     private int test = 0;
 
     public int sum() {
         Blackhole.consumeCPU(100);
+//        Blackhole.consumeCPU(2_000);
+//        Blackhole.consumeCPU(5_000);
+//        Blackhole.consumeCPU(10_000);
+//        Blackhole.consumeCPU(25_000);
+//        Blackhole.consumeCPU(50_000);
         return test;
     }
 
