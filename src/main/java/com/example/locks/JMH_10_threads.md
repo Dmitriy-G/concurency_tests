@@ -1,4 +1,4 @@
-Score is throughput in ops/s (higher is better). Error (%) = Error / Score ? 100. Total = Score / lowest Score in the same table; the worst lock is x 1.
+Score is throughput in ops/s (higher is better). Error (%) = Error / Score * 100. Total = Score / lowest Score in the same table: the throughput multiplier relative to the worst-performing lock, which is x 1.
 
 # Black hole 100
 
@@ -84,35 +84,43 @@ Score is throughput in ops/s (higher is better). Error (%) = Error / Score ? 100
 
 ### Benchmark read/write 50/50
 
-ReadWriteLock            50  thrpt   25  108291.473 ? 38598.563  ops/s
-ReentrantLock            50  thrpt   25   55617.516 ?    67.723  ops/s
-StampedLock              50  thrpt   25   83275.617 ?  5679.957  ops/s
-Synchronized             50  thrpt   25   55682.975 ?   136.517  ops/s
+| Lock Type | Score | Error | Error (%) | Total |
+| --- | ---: | ---: | ---: | ---: |
+| ReadWriteLock | 108291.473 | 38598.563 | 35.64% | x 1.947 |
+| StampedLock | 83275.617 | 5679.957 | 6.82% | x 1.497 |
+| Synchronized | 55682.975 | 136.517 | 0.25% | x 1.001 |
+| ReentrantLock | 55617.516 | 67.723 | 0.12% | x 1 |
 
 ### Benchmark read/write 99/1
 
-ReadWriteLock           1  thrpt   25  255921.507 ? 94988.202  ops/s
-ReentrantLock           1  thrpt   25   48408.124 ?  6846.090  ops/s
-StampedLock             1  thrpt   25  187270.563 ?  2844.837  ops/s
-Synchronized            1  thrpt   25   28090.479 ?    46.943  ops/s
+| Lock Type | Score | Error | Error (%) | Total |
+| --- | ---: | ---: | ---: | ---: |
+| ReadWriteLock | 255921.507 | 94988.202 | 37.12% | x 9.111 |
+| StampedLock | 187270.563 | 2844.837 | 1.52% | x 6.667 |
+| ReentrantLock | 48408.124 | 6846.090 | 14.14% | x 1.723 |
+| Synchronized | 28090.479 | 46.943 | 0.17% | x 1 |
 
 
 # Black hole 20k
 
 ### Benchmark read/write 50/50
 
-ReadWriteLock           50  thrpt   25  135037.300 ? 44962.623  ops/s
-ReentrantLock           50  thrpt   25   68254.106 ? 11382.243  ops/s
-StampedLock             50  thrpt   25   72844.873 ?  3049.684  ops/s
-Synchronized            50  thrpt   25   43711.365 ?  5129.261  ops/s
+| Lock Type | Score | Error | Error (%) | Total |
+| --- | ---: | ---: | ---: | ---: |
+| ReadWriteLock | 135037.300 | 44962.623 | 33.30% | x 3.089 |
+| StampedLock | 72844.873 | 3049.684 | 4.19% | x 1.666 |
+| ReentrantLock | 68254.106 | 11382.243 | 16.68% | x 1.561 |
+| Synchronized | 43711.365 | 5129.261 | 11.73% | x 1 |
 
 
 ### Benchmark read/write 99/1
 
-ReadWriteLock             1  thrpt   25  163344.348 ? 65080.533  ops/s
-ReentrantLock             1  thrpt   25   21281.757 ?   217.140  ops/s
-StampedLock               1  thrpt   25  236940.991 ? 74179.184  ops/s
-Synchronized              1  thrpt   25   38057.086 ?  3718.963  ops/s
+| Lock Type | Score | Error | Error (%) | Total |
+| --- | ---: | ---: | ---: | ---: |
+| StampedLock | 236940.991 | 74179.184 | 31.31% | x 11.134 |
+| ReadWriteLock | 163344.348 | 65080.533 | 39.84% | x 7.675 |
+| Synchronized | 38057.086 | 3718.963 | 9.77% | x 1.788 |
+| ReentrantLock | 21281.757 | 217.140 | 1.02% | x 1 |
 
 
 # Black hole 25k
@@ -139,33 +147,41 @@ Synchronized              1  thrpt   25   38057.086 ?  3718.963  ops/s
 
 ### Benchmark read/write 50/50
 
-ReadWriteLock              50  thrpt   25  152762.630 ? 4397.571  ops/s
-ReentrantLock             50  thrpt   25   53776.095 ?  237.886  ops/s
-StampedLock                       50  thrpt   25  142989.507 ? 4133.460  ops/s
-Synchronized                                50  thrpt   25   52782.744 ?  214.008  ops/s
+| Lock Type | Score | Error | Error (%) | Total |
+| --- | ---: | ---: | ---: | ---: |
+| ReadWriteLock | 152762.630 | 4397.571 | 2.88% | x 2.894 |
+| StampedLock | 142989.507 | 4133.460 | 2.89% | x 2.709 |
+| ReentrantLock | 53776.095 | 237.886 | 0.44% | x 1.019 |
+| Synchronized | 52782.744 | 214.008 | 0.41% | x 1 |
 
 ### Benchmark read/write 99/1
 
-ReadWriteLock             1  thrpt   25  214789.644 ? 2000.408  ops/s
-ReentrantLock             1  thrpt   25   26781.248 ?  115.152  ops/s
-StampedLock               1  thrpt   25  235738.106 ? 6310.587  ops/s
-Synchronized              1  thrpt   25   26729.757 ?  110.237  ops/s
+| Lock Type | Score | Error | Error (%) | Total |
+| --- | ---: | ---: | ---: | ---: |
+| StampedLock | 235738.106 | 6310.587 | 2.68% | x 8.819 |
+| ReadWriteLock | 214789.644 | 2000.408 | 0.93% | x 8.036 |
+| ReentrantLock | 26781.248 | 115.152 | 0.43% | x 1.002 |
+| Synchronized | 26729.757 | 110.237 | 0.41% | x 1 |
 
 # Black hole 40k
 
 ### Benchmark read/write 50/50
 
-ReadWriteLock            50  thrpt   25  86929.455 ? 6546.676  ops/s
-ReentrantLock            50  thrpt   25  35918.816 ? 1026.692  ops/s
-StampedLock              50  thrpt   25  84571.126 ? 3797.770  ops/s
-Synchronized             50  thrpt   25  37889.173 ? 1267.888  ops/s
+| Lock Type | Score | Error | Error (%) | Total |
+| --- | ---: | ---: | ---: | ---: |
+| ReadWriteLock | 86929.455 | 6546.676 | 7.53% | x 2.420 |
+| StampedLock | 84571.126 | 3797.770 | 4.49% | x 2.355 |
+| Synchronized | 37889.173 | 1267.888 | 3.35% | x 1.055 |
+| ReentrantLock | 35918.816 | 1026.692 | 2.86% | x 1 |
 
 ### Benchmark read/write 99/1
 
-ReadWriteLock             1  thrpt   25  165880.709 ? 2200.039  ops/s
-ReentrantLock             1  thrpt   25   20353.577 ?   74.751  ops/s
-StampedLock               1  thrpt   25  173209.978 ? 4110.912  ops/s
-Synchronized              1  thrpt   25   20221.221 ?   88.619  ops/s
+| Lock Type | Score | Error | Error (%) | Total |
+| --- | ---: | ---: | ---: | ---: |
+| StampedLock | 173209.978 | 4110.912 | 2.37% | x 8.566 |
+| ReadWriteLock | 165880.709 | 2200.039 | 1.33% | x 8.203 |
+| ReentrantLock | 20353.577 | 74.751 | 0.37% | x 1.007 |
+| Synchronized | 20221.221 | 88.619 | 0.44% | x 1 |
 
 
 # Black hole 50k
